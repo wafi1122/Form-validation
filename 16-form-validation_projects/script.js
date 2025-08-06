@@ -11,13 +11,38 @@ form.addEventListener('submit', (event) => {
     event.preventDefault();
     validate();
 })
+const sendData = (usernameVal,sRate , count) => {
+    if(sRate === count) {
+        alert('registeation successfull');
+        swal("Welcome! " + usernameVal, "Registration Successful!", "success");
+       // if we want to go to  the next page we have  to write this down method but the new html file is avaiable then it work . 
+        // location.href = `demo.html?username=${usernameVal}`
+    }
+}
+
+//for final data validation
+const successMsg = (usernameVal)=>{
+    let formCon = document.getElementsByClassName('form-control');
+    var count = formCon.length -1 ;
+    for(var i = 0; i <formCon.length; i++){
+        if(formCon[i].className === "form-control success"){
+            var sRate = 0 + i;
+            console.log(sRate)
+            sendData(usernameVal,sRate , count)
+        }else{
+            return false;
+        }
+    }
+}
+
 //more email validate
 const isEmail = (emailVal) => {
-    var atSymbol = emailVal.indexof("@");
+    var atSymbol = emailVal.indexOf("@");
     if(atSymbol < 1) return false;
-    var dot = eamilVar.lastIndexof('.');
+    var dot = emailVal.lastIndexOf('.');
     if(dot <= atSymbol + 2 ) return false;
-    if (dot === )
+    if (dot === emailVal.length - 1  )return false;
+    return true;
 }
 
 //define the validate function
@@ -30,9 +55,9 @@ const validate = () => {
 
     //validate username
     if(usernameVal === ""){
-        setErrormsg(username,"username cannot be blank")
+        setErrorMsg(username,"username cannot be blank")
     }else if(usernameVal.length <= 2){
-        setErrormsg(username,"username min 3 characters")
+        setErrorMsg(username,"username min 3 characters")
 
     }else{
         setSuccessMsg(username);
@@ -40,11 +65,51 @@ const validate = () => {
 
     //validate email
     if(emailVal === ""){
-        setErrormsg(email,"email cannot be blank")
+        setErrorMsg(email,"email cannot be blank")
     }else if(!isEmail(emailVal)){
-        setErrormsg(emailVal,"Not a valid email")
+        setErrorMsg(email,"Not a valid email")
 
     }else{
         setSuccessMsg(email);
     }
+    //validate phone
+    if(phoneVal === ""){
+        setErrorMsg(phone,"number cannot be blank")
+    }else if(phoneVal.length!= 10){
+        setErrorMsg(phone,"Not a valid phone num")
+
+    }else{
+        setSuccessMsg(phone);
+    }
+    //validate password
+    if(passwordVal === ""){
+        setErrorMsg(password,"Password cannot be blank")
+    }else if(passwordVal.length <= 5){
+        setErrorMsg(password,"Min 6 charaters")
+
+    }else{
+        setSuccessMsg(password);
+    }
+    //validate cpassword
+    if(cpasswordVal === ""){
+        setErrorMsg(cpassword,"conform Password cannot be blank")
+    }else if(passwordVal !== cpasswordVal){
+        setErrorMsg(cpassword,"password is not matching")
+
+    }else{
+        setSuccessMsg(cpassword);
+    }
+
+    successMsg(usernameVal);
+
+}
+function setErrorMsg(input,errormsgs){
+    const formControl = input.parentElement;
+    const small = formControl.querySelector('small')
+    formControl.className = "form-control error"
+    small.innerText = errormsgs
+}
+function setSuccessMsg(input){
+    const formControl = input.parentElement;
+    formControl.className = "form-control success"
 }

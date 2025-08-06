@@ -50,7 +50,7 @@ body{
 
 }
 .form-control{
-    margin-bottom: 20px;
+    margin-bottom: 30px;
     position: relative;
 }
 .form-control label{
@@ -94,7 +94,6 @@ body{
 .form-control small{
     color: #e74c3c;
     position: absolute;
-    bottom: 0;
     left: 0;
     visibility: hidden;
 }
@@ -111,6 +110,7 @@ body{
     background: var(--lg-color) ;
     border-radius: 6px;
     border: none;
+    cursor: pointer;
     color: #fff;
     display: block;
     font-family: var(--my-btn-font);
