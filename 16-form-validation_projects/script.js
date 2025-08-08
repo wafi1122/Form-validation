@@ -75,7 +75,7 @@ const validate = () => {
     //validate phone
     if(phoneVal === ""){
         setErrorMsg(phone,"number cannot be blank")
-    }else if(phoneVal.length!= 10){
+    }else if(phoneVal.length <= 9){
         setErrorMsg(phone,"Not a valid phone num")
 
     }else{
